@@ -1,0 +1,17 @@
+{
+  "name": "fe",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "book"
+  ],
+  "author": "Lorenzo Rampa",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react-router-dom": "^7.6.3"
+  }
+}
