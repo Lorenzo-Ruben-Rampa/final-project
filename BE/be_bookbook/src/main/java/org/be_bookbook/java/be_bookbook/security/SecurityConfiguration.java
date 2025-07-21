@@ -9,22 +9,29 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 
+
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
     @Bean
-    @SuppressWarnings("removal")
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests()
-                .requestMatchers("/pizzas/create", "/pizzas/edit/**", "/pizzas/delete/**").hasAuthority("ADMIN")
-                .requestMatchers(HttpMethod.POST, "/pizzas/**").hasAnyAuthority("ADMIN")
-                .requestMatchers("/ingredients", "/ingredients**").hasAnyAuthority("ADMIN")
-                .requestMatchers("/pizzas", "/pizzas/**").hasAnyAuthority("USER", "ADMIN")
+        http.authorizeHttpRequests(auth -> auth
+                .requestMatchers("/books/create", "/books/edit/**", "/books/delete/**").hasAuthority("ADMIN")
+                .requestMatchers(HttpMethod.POST, "/books/**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/genres", "/genres**").hasAnyAuthority("ADMIN")
+                .requestMatchers("/books", "/books/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers("/**").permitAll()
-                .and().formLogin()
-                .and().logout()
-                .and().exceptionHandling();
-
+                )
+                .formLogin(form -> form
+                .defaultSuccessUrl("/books", true)
+                .permitAll()
+                )
+                .logout(logout -> logout .logoutUrl("/logout") // URL per effettuare il logout
+                .permitAll() // Permetti l'accesso all'URL di logout )
+                )
+                .exceptionHandling(exception -> exception 
+                .accessDeniedPage("/access-denied")
+                );           
         return http.build();
     }
 

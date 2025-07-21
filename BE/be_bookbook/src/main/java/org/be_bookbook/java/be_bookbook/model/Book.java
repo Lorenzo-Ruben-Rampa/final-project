@@ -1,5 +1,6 @@
 package org.be_bookbook.java.be_bookbook.model;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.time.LocalDate;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -36,12 +37,12 @@ public class Book {
     private Integer id;
 
     @NotEmpty(message="Il nome non può essere vuoto")
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "Il nome può contenere solo lettere e spazi.")
+    @Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ0-9'\\s,:]+$", message = "Il campo può contenere solo lettere, numeri, spazi, apostrofi, virgole e due punti.")
     @Size(max = 100, message = "Il nome non può superare i 100 caratteri.")
     private String name;
 
     @NotEmpty(message="L'autore non può essere vuoto")
-    @Pattern(regexp = "^[a-zA-Z\\s]+$", message = "L'autore può contenere solo lettere e spazi.")
+    @Pattern(regexp = "^[a-zA-ZÀ-ÖØ-öø-ÿ'\\s.]+$", message = "L'autore può contenere solo lettere, spazi, apostrofi e punti.")
     @Size(max = 100, message = "L'autore non può superare i 100 caratteri.")
     private String author;
 
@@ -107,6 +108,14 @@ public class Book {
         this.synopsis = synopsis;
     }
 
+    public String getPublisher() {
+        return this.publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
     public String getCoverImage() {
         return this.coverImage;
     }
@@ -136,7 +145,11 @@ public class Book {
     }
 
     public void setPrice(BigDecimal price) {
-        this.price = price;
+        if (price != null) {
+            this.price = price.setScale(2, RoundingMode.HALF_UP); // Force 2 decimal places
+        } else {
+            this.price = null;
+        }
     }
 
     //Getters e Setters di genres

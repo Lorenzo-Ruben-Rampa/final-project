@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Generi Letterari</title>
+    <th:block th:insert="~{fragments :: styles}"></th:block>
+</head>
+<body>
+     <header>
+        <th:block th:insert="~{fragments :: header}"></th:block>
+    </header>
+    <main class="container mt-3">
+        <section class="row d-flex justify-content-center">
+            <h2 class="text-center mt-3 mb-5 text-danger">Elenco generi letterari</h2>
+            <div class="col-6">
+            <table class="table" th:if="${genres.size() > 0}">
+                <tbody>
+                    <tr th:each="genres : ${genres}" th:object="${genres}">
+                        <td class="align-middle text-warning">[[*{name}]]</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p th:text="'Nessuna genere letterario disponibile'" th:unless="${genres.size > 0}" />
+    </main>
+</body>
+</html>

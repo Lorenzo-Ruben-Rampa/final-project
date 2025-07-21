@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Libro: [[${book.name}]]</title>
+    <th:block th:insert="~{fragments :: styles}"></th:block>
+</head>
+<body>
+    <header>
+        <th:block th:insert="~{fragments :: header}"></th:block>
+    </header>
+    <main class="container mt-3">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <h1 class="text-center text-danger"><span th:text="${book.name}"></span></h1>
+                <div class="row">
+                    <div class="row g-0 d-flex justify-content-center">
+                        <div class="col-md-12 fixed d-flex justify-content-center">
+                            <img th:src="${book.coverImage}" th:alt="${book.name}" class="mt-4" style="max-height: 400px; object-fit: cover;">                        
+                        </div>
+                <div class="d-flex justify-content-space-between">
+                    <div class="col-md-6 fixed-h orange mt-5 mb-3">
+                        <div class="card-body mt-5 mb-3 d-flex justify-content-center flex-wrap">
+                            <ul class="list-unstyled"> 
+                                <li class="fw-bold">Generi Letterari: </li>
+                                <ul class="list-unstyled">
+                                    <li th:each="genre : ${book.genres}">
+                                        <span th:text="${genre.name}">[Genere Letterario]</span>
+                                    </li>
+                                </ul>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-8 fixed-h orange mt-5 mb-3">
+                        <div class="card-body mt-5 mb-3">
+                            <p class="card-text"><strong>Sinossi:</strong> <span th:text="${book.synopsis}"></span></p>
+                            <p class="card-text fs-3 text-center text-warning"><strong>Prezzo:</strong> <span th:text="${book.price}"></span> &euro;</p>
+                            <p class="text-center"><a th:href="@{/books}" class="btn btn-primary mt-3">Torna al Menu</a></p>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <script th:src="@{/webjars/jquery/3.6.0/jquery.min.js}"></script>
+    <script th:src="@{/webjars/popper.js/2.9.3/umd/popper.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.0/js/bootstrap.min.js}"></script>
+    </body>
+    </html>

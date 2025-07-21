@@ -14,11 +14,8 @@ const Homepage = () => {
         axios.get(import.meta.env.VITE_API_URL)
             .then((response) => {
                 console.log(response.data);
-                console.log(response);
-                console.log(books);
                 const {data } = response;
                 setBooks(data);
-                console.log(books);
             })
             .catch((error) => {console.error(error) })
             .then(() => {
@@ -32,9 +29,7 @@ const Homepage = () => {
     
     return (
         <>
-            <h1 className="text-primary">Bibliotecarium</h1>
             <section>
-                <h2><i>Verba volant, scripta manent</i></h2>
                 {
                     books.map((book) => 
                         <BookCard key={book.id} book={book} isDetail={false} />)

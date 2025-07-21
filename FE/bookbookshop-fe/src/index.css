@@ -7,8 +7,27 @@ h1 {
   color: red !important;
 }
 
+p {
+  background-color: rgb(37, 30, 58) !important;
+}
+
+address {
+  background-color: rgb(37, 30, 58) !important;
+}
+
 h2 {
-  color: red !important;
+  color: gold !important;
+  background-color: rgb(37, 30, 58) !important;
+  padding: 15px;
+}
+
+em {
+  background-color: rgb(37, 30, 58);
+  padding: 1em;
+}
+
+time {
+  background-color: rgb(37, 30, 58);
 }
 
 footer span {
@@ -16,11 +35,15 @@ footer span {
 }
 
 main {
-  background-color: grey !important;
+  background-color: rgb(37, 30, 58) !important;
+}
+
+section {
+   background-color: rgb(37, 30, 58) !important;
 }
 
 section div {
-    background-color: grey !important;
+    background-color: rgb(37, 30, 58) !important;
 }
 
 .overlay {
@@ -43,12 +66,22 @@ section div {
   }
 }
 
--card-img-top {
+.logo {
   height: 300px;
   object-fit: contain;
 }
 
--book-img {
-  max-height: 200px;
-  margin-right: 2rem;
+.book-img {
+  height: 600px;
+  max-width: 500px;
+}
+
+.grey {
+  background-color: rgb(37, 30, 58)  !important;
+}
+
+.user-info {
+  position: fixed;
+  top: 20px;
+  right:20px;
 }

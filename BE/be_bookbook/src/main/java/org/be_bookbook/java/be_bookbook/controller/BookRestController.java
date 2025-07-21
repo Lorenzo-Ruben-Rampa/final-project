@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import java.util.Optional;
 
 
@@ -41,11 +42,13 @@ public class BookRestController {
     }
     
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Book> store(@RequestBody Book book) {
         return new ResponseEntity<Book>(service.create(book), HttpStatus.OK);
     }
     
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Book> update(@RequestBody Book book, @PathVariable Integer id) {
       
 
@@ -57,6 +60,7 @@ public class BookRestController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Book> delete(@PathVariable Integer id) {
         if (service.findById(id).isEmpty()) {
             return new ResponseEntity<Book>(HttpStatus.NOT_FOUND);
